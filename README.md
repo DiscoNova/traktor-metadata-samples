@@ -27,3 +27,4 @@ So... If You are still here, You're **exactly** the kind of tinkerer who might g
 # Samples
 
 * [Shell scripting](shell-script/) on *nix family (Linux, Mac OSX, etc.)
+* [Python](python/)
