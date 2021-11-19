@@ -69,18 +69,17 @@ function registerEventListeners({ guid = '00000000-0000-0000-0000-000000000000',
             try {
                 const streamBefore = JSON.stringify(state.stream);
                 const trackBefore = JSON.stringify(state.track);
-                fetch(`//:8080/api/${guid}/current`)
+                // Note: "//:8080/" is shorthand URL that normally should be identified by the client as
+                // "<same-transport-schema-as-for-this-file>://<same-server-as-for-this-file>:8080/..." etc.
+                fetch(`//:8080/api/${guid}/current`, {method: 'GET', mode: 'cors'})
                 .then(async function (response) {
                     if (!response.json) {
                         throw new Error('Expected JSON ... got ... something else!');
                     }
                     const responseData = await response.json();
+                    // TODO: Maybe should check whether responseData actually has these?
                     state.stream = responseData.stream;
                     state.track = responseData.track;
-                    /*
-                    if (responseData.stream) { state.stream = responseData.stream; }
-                    if (responseData.track) { state.track = responseData.track; }
-                    */
                 })
                 .catch(function(error) {
                     console.debug(Date.now(), 'That did not work out exactly as expected?', error);
