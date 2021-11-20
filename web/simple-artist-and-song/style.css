@@ -1,0 +1,19 @@
+.harvester {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.harvester > span {
+    font-family: monospace;
+}
+
+.harvester > span + span {
+    margin-left: 8px;
+}
+
+.harvester > .artist {
+    font-weight: bold;
+}
+
+.harvester > .title {
+    font-style: italic;
+}
