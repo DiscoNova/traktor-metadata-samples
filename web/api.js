@@ -63,43 +63,30 @@ function registerEventListeners({ guid = '00000000-0000-0000-0000-000000000000',
             updating: undefined,
         };
 
-        function update() {
+        async function update() {
             if (state.updating) { return; }
             state.updating = true;
             try {
                 const streamBefore = JSON.stringify(state.stream);
                 const trackBefore = JSON.stringify(state.track);
-                // Note: "//:8080/" is shorthand URL that normally should be identified by the client as
-                // "<same-transport-schema-as-for-this-file>://<same-server-as-for-this-file>:8080/..." etc.
-                fetch(`//:8080/api/${guid}/current`, {method: 'GET', mode: 'cors'})
-                .then(async function (response) {
-                    if (!response.json) {
-                        throw new Error('Expected JSON ... got ... something else!');
-                    }
-                    const responseData = await response.json();
-                    // TODO: Maybe should check whether responseData actually has these?
-                    state.stream = responseData.stream;
-                    state.track = responseData.track;
-                })
-                .catch(function(error) {
-                    console.debug(Date.now(), 'That did not work out exactly as expected?', error);
-                })
-                .finally(function() {
-                    // Send the events for recipients interested in them...
-                    if (streamBefore !== JSON.stringify(state.stream)) {
-                        global.dispatchEvent(new CustomEvent('harvester:notification:stream', { detail: state.stream }));
-                    }
-                    if (trackBefore !== JSON.stringify(state.track)) {
-                        global.dispatchEvent(new CustomEvent('harvester:notification:track', { detail: state.track }));
-                    }
-                });
+                const response = await fetch(`/api/${guid}/current`, {method: 'GET', mode: 'cors'});
+                const responseData = (await response.json()) || {};
+                state.stream = responseData.stream ? responseData.stream : state.stream;
+                state.track = responseData.track ? responseData.track : state.track;
+
+                if (streamBefore !== JSON.stringify(state.stream)) {
+                    global.dispatchEvent(new CustomEvent('harvester:notification:stream', { detail: state.stream }));
+                }
+                if (trackBefore !== JSON.stringify(state.track)) {
+                    global.dispatchEvent(new CustomEvent('harvester:notification:track', { detail: state.track }));
+                }
             } finally {
                 state.updating = false;
             }
         }
 
         // Check every 0.5 seconds...
-        global.setInterval(update, 500);
+        global.checkInterval = global.setInterval(update, 500);
         update();
     })(global);
 }
