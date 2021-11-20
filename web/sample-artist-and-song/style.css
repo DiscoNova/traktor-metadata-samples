@@ -1,0 +1,52 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body.greenscreen {
+    /* For OBS greenscreen... */
+    background: rgb(0, 255, 0);
+}
+
+#current-track {
+    opacity: 1;
+    transition: opacity linear 2500ms;
+    position: absolute;
+    bottom: 32px;
+    height: 96px;
+    width: 120%;
+    left: -10%;
+}
+
+#current-track.fadeOut {
+    opacity: 0;
+    left: 0;
+}
+
+#current-track > div {
+    background-color: rgb(255, 255, 255);
+    height: 42px;
+    line-height: 42px;
+    position: absolute;
+    width: 100%;
+    transition: left linear 2500ms;
+    text-align: center;
+}
+
+#current-track > div.artist {
+    top: 8px;
+    left: -100%;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+#current-track > div.title {
+    bottom: 0;
+    left: 100%;
+    font-style: italic;
+    font-size: 24px;
+}
+
+#current-track.fadeIn > div {
+    left: 0;
+}
