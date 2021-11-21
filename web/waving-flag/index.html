@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta charset="utf-8" />
+        <title>Harvester</title>
+        <link rel="stylesheet" href="/style.css" />
+        <style type="text/css">
+            html, body {
+                font-family: Helvetica, Arial, sans-serif;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+            }
+            #mimir-js-test {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                border: 1px solid;
+                border-radius: 8px;
+                padding: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <section id="mimir-main-app-ui">
+            <section id="mimir-js-test">
+                <h1>JavaScript required</h1>
+                <p>This service requires that JavaScript is enabled.</p>
+                <script>
+                    const jsTest = document.querySelector('#mimir-js-test');
+                    const testH1 = jsTest.querySelector('h1');
+                    const testP = jsTest.querySelector('p');
+                    testH1.innerHTML = 'Initializing...';
+                    testP.innerHTML = 'Attempting to initialize Harvester API';
+                    const api = document.createElement('script');
+                    api.src = '/api.js';
+                    api.module = true;
+                    document.body.appendChild(api);
+                    let attemptCounter = 0;
+                    function injectScript() {
+                        attemptCounter++;
+                        if (attemptCounter > 100) {
+                            throw new Error('Waited 10 seconds, but Harvester API never appeared?');
+                        }
+                        if (!window.harvesterAPI) {
+                            window.setTimeout(injectScript, 100);
+                            throw new Error('Harvester API not yet available? Retrying...');
+                        }
+                        const script = document.createElement('script');
+                        script.src = '/script.js';
+                        script.defer = true;
+                        document.body.appendChild(script);
+                        jsTest.parentNode.removeChild(jsTest);
+                    }
+                    injectScript();
+                </script>
+            </section>
+        </section>
+    </body>
+</html>

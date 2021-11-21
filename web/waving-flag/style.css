@@ -1,0 +1,335 @@
+html, body {
+    background: #000;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 250px;
+}
+
+.current-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate3d(0,0,0,0);
+    transition: filter 750ms linear, opacity 1000ms linear;
+    filter: blur(0);
+    opacity: 1.0;
+}
+
+.current-track.fadeIn {
+    filter: blur(32px);
+    opacity: 0.0;
+}
+
+.current-track.fadeOut {
+    filter: blur(32px);
+    opacity: 0.25;
+}
+
+div.upper-line,
+div.lower-line {
+    will-change: transform, opacity;
+}
+
+.text-layer {
+    filter: blur(0);
+    width: 75%;
+    position: absolute;
+    top: calc(50% - 8rem / 2);
+    left: 50%;
+    transform-style: preserve-3d;
+}
+
+.text-layer .upper-line,
+.text-layer .lower-line {
+    margin-top: calc(0 - 8rem / 2);
+    position: absolute;
+    font-size: 8rem;
+    color: #e6e6ff;
+    line-height: 8rem;
+    font-family: "Impact", sans-serif;
+    padding: 20px 0;
+    mix-blend-mode: screen;
+    transform-style: preserve-3d;
+}
+
+.text-layer .upper-line:nth-child(1),
+.text-layer .lower-line:nth-child(1) {
+    clip-path: polygon(-30% 0, -20% 0, 20% 100%, 0% 100%);
+    animation: wave 2000ms -10000ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(2),
+.text-layer .lower-line:nth-child(2) {
+    clip-path: polygon(-25% 0, -15% 0, 25% 100%, 5% 100%);
+    animation: wave 2000ms -9800ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(3),
+.text-layer .lower-line:nth-child(3) {
+    clip-path: polygon(-20% 0, -10% 0, 30% 100%, 10% 100%);
+    animation: wave 2000ms -9600ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(4),
+.text-layer .lower-line:nth-child(4) {
+    clip-path: polygon(-15% 0, -5% 0, 35% 100%, 15% 100%);
+    animation: wave 2000ms -9400ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(5),
+.text-layer .lower-line:nth-child(5) {
+    clip-path: polygon(-10% 0, 0% 0, 40% 100%, 20% 100%);
+    animation: wave 2000ms -9200ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(6),
+.text-layer .lower-line:nth-child(6) {
+    clip-path: polygon(-5% 0, 5% 0, 45% 100%, 25% 100%);
+    animation: wave 2000ms -9000ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(7),
+.text-layer .lower-line:nth-child(7) {
+    clip-path: polygon(0% 0, 10% 0, 50% 100%, 30% 100%);
+    animation: wave 2000ms -8800ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(8),
+.text-layer .lower-line:nth-child(8) {
+    clip-path: polygon(5% 0, 15% 0, 55% 100%, 35% 100%);
+    animation: wave 2000ms -8600ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(9),
+.text-layer .lower-line:nth-child(9) {
+    clip-path: polygon(10% 0, 20% 0, 60% 100%, 40% 100%);
+    animation: wave 2000ms -8400ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(10),
+.text-layer .lower-line:nth-child(10) {
+    clip-path: polygon(15% 0, 25% 0, 65% 100%, 45% 100%);
+    animation: wave 2000ms -8200ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(11),
+.text-layer .lower-line:nth-child(11) {
+    clip-path: polygon(20% 0, 30% 0, 70% 100%, 50% 100%);
+    animation: wave 2000ms -8000ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(12),
+.text-layer .lower-line:nth-child(12) {
+    clip-path: polygon(25% 0, 35% 0, 75% 100%, 55% 100%);
+    animation: wave 2000ms -7800ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(13),
+.text-layer .lower-line:nth-child(13) {
+    clip-path: polygon(30% 0, 40% 0, 80% 100%, 60% 100%);
+    animation: wave 2000ms -7600ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(14),
+.text-layer .lower-line:nth-child(14) {
+    clip-path: polygon(35% 0, 45% 0, 85% 100%, 65% 100%);
+    animation: wave 2000ms -7400ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(15),
+.text-layer .lower-line:nth-child(15) {
+    clip-path: polygon(40% 0, 50% 0, 90% 100%, 70% 100%);
+    animation: wave 2000ms -7200ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(16),
+.text-layer .lower-line:nth-child(16) {
+    clip-path: polygon(45% 0, 55% 0, 95% 100%, 75% 100%);
+    animation: wave 2000ms -7000ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(17),
+.text-layer .lower-line:nth-child(17) {
+    clip-path: polygon(50% 0, 60% 0, 100% 100%, 80% 100%);
+    animation: wave 2000ms -6800ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(18),
+.text-layer .lower-line:nth-child(18) {
+    clip-path: polygon(55% 0, 65% 0, 105% 100%, 85% 100%);
+    animation: wave 2000ms -6600ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(19),
+.text-layer .lower-line:nth-child(19) {
+    clip-path: polygon(60% 0, 70% 0, 110% 100%, 90% 100%);
+    animation: wave 2000ms -6400ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(20),
+.text-layer .lower-line:nth-child(20) {
+    clip-path: polygon(65% 0, 75% 0, 115% 100%, 95% 100%);
+    animation: wave 2000ms -6200ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(21),
+.text-layer .lower-line:nth-child(21) {
+    clip-path: polygon(70% 0, 80% 0, 120% 100%, 100% 100%);
+    animation: wave 2000ms -6000ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(22),
+.text-layer .lower-line:nth-child(22) {
+    clip-path: polygon(75% 0, 85% 0, 125% 100%, 105% 100%);
+    animation: wave 2000ms -5800ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(23),
+.text-layer .lower-line:nth-child(23) {
+    clip-path: polygon(80% 0, 90% 0, 130% 100%, 110% 100%);
+    animation: wave 2000ms -5600ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(24),
+.text-layer .lower-line:nth-child(24) {
+    clip-path: polygon(85% 0, 95% 0, 135% 100%, 115% 100%);
+    animation: wave 2000ms -5400ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(25),
+.text-layer .lower-line:nth-child(25) {
+    clip-path: polygon(90% 0, 100% 0, 140% 100%, 120% 100%);
+    animation: wave 2000ms -5200ms ease-in-out infinite alternate;
+}
+
+.text-layer .upper-line:nth-child(26),
+.text-layer .lower-line:nth-child(26) {
+    clip-path: polygon(95% 0, 105% 0, 145% 100%, 125% 100%);
+    animation: wave 2000ms -5000ms ease-in-out infinite alternate;
+}
+
+.text-layer .lower-line {
+    margin-top: 10rem;
+}
+
+.text-layer .lower-line:nth-child(1) {
+    animation-delay: -7500ms;
+}
+
+.text-layer .lower-line:nth-child(2) {
+    animation-delay: -7300ms;
+}
+
+.text-layer .lower-line:nth-child(3) {
+    animation-delay: -7100ms;
+}
+
+.text-layer .lower-line:nth-child(4) {
+    animation-delay: -6900ms;
+}
+
+.text-layer .lower-line:nth-child(5) {
+    animation-delay: -6700ms;
+}
+
+.text-layer .lower-line:nth-child(6) {
+    animation-delay: -6500ms;
+}
+
+.text-layer .lower-line:nth-child(7) {
+    animation-delay: -6300ms;
+}
+
+.text-layer .lower-line:nth-child(8) {
+    animation-delay: -6100ms;
+}
+
+.text-layer .lower-line:nth-child(9) {
+    animation-delay: -5900ms;
+}
+
+.text-layer .lower-line:nth-child(10) {
+    animation-delay: -5700ms;
+}
+
+.text-layer .lower-line:nth-child(11) {
+    animation-delay: -5500ms;
+}
+
+.text-layer .lower-line:nth-child(12) {
+    animation-delay: -5300ms;
+}
+
+.text-layer .lower-line:nth-child(13) {
+    animation-delay: -5100ms;
+}
+
+.text-layer .lower-line:nth-child(14) {
+    animation-delay: -4900ms;
+}
+
+.text-layer .lower-line:nth-child(15) {
+    animation-delay: -4700ms;
+}
+
+.text-layer .lower-line:nth-child(16) {
+    animation-delay: -4500ms;
+}
+
+.text-layer .lower-line:nth-child(17) {
+    animation-delay: -4300ms;
+}
+
+.text-layer .lower-line:nth-child(18) {
+    animation-delay: -4100ms;
+}
+
+.text-layer .lower-line:nth-child(19) {
+    animation-delay: -3900ms;
+}
+
+.text-layer .lower-line:nth-child(20) {
+    animation-delay: -3700ms;
+}
+
+.text-layer .lower-line:nth-child(21) {
+    animation-delay: -3500ms;
+}
+
+.text-layer .lower-line:nth-child(22) {
+    animation-delay: -3300ms;
+}
+
+.text-layer .lower-line:nth-child(23) {
+    animation-delay: -3100ms;
+}
+
+.text-layer .lower-line:nth-child(24) {
+    animation-delay: -2900ms;
+}
+
+.text-layer .lower-line:nth-child(25) {
+    animation-delay: -2700ms;
+}
+
+.text-layer .lower-line:nth-child(26) {
+    animation-delay: -2500ms;
+}
+
+@keyframes wave {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95) rotateX(20deg) rotateY(20deg) rotateZ(0deg);
+        color: #1e1e64;
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.05) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        color: #e6e6ff;
+        opacity: 1.0;
+    }
+}
