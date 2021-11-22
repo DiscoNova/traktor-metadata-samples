@@ -27,12 +27,12 @@ body {
 }
 
 #current-track > div {
-    color:  #f0f;
+    font-size:  6vmax;
+    color:  #c2c;
 }
 
 #current-track > div + div {
-    font-size:  6vmax;
-    color:  #ff0;
+    color:  #cc2;
 }
 
 #current-track.fadeOut {
