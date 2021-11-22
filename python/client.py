@@ -23,6 +23,7 @@ args = argParser.parse_args()
 HARVESTER_HOST = args.harvester_host
 HARVESTER_PORT = args.harvester_port
 HARVESTER_HOSTPORT = HARVESTER_HOST + ':' + str(HARVESTER_PORT)
+HARVESTER_GUID = '00000000-0000-0000-0000-000000000000'; # Only for testing...
 
 def main():
     # This script attempts to get the current data from the API endpoint ... if it gets something and the data is
@@ -32,7 +33,7 @@ def main():
     # played tracks (minus the current one) in "history.log"
 
     while True:
-        response = urlopen("http://%s/api/00000000-0000-0000-0000-000000000000/current" % HARVESTER_HOSTPORT)
+        response = urlopen("http://%s/api/%s/current" % (HARVESTER_HOSTPORT, HARVESTER_GUID))
         if (response.getcode() == 200):
             data = json.loads(response.read())
             with open('current.json', 'w+') as file:
