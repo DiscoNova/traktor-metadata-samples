@@ -1,16 +1,53 @@
-from requests import get
+#!/usr/local/bin/python3
+
+from urllib.request import urlopen
+from argparse import ArgumentParser
 from time import sleep
+import json
 
-# This script attempts to get the current data from the API endpoint ... if it gets something and the data is
-# different from "what it was before", the data will get overwritten.
+argParser = ArgumentParser()
+argParser.add_argument(
+    "--harvester-host",
+    type    = str,
+    default = "127.0.0.1",
+    help    = "the ip-address where the Harvester API-requests are queried from"
+    )
+argParser.add_argument(
+    "--harvester-port",
+    type    = int,
+    default = 8080,
+    help    = "the port number where the Harvester API-requests are queried from"
+    )
+args = argParser.parse_args()
 
-while True:
-    response = get('http://127.0.0.1:8080/api/00000000-0000-0000-0000-000000000000/current')
-    if response.status_code == 200:
-        with open('current.json', 'w+') as file:
-            old = file.read()
-            if old <> response.content:
-                file.write(response.content)
-    sleep(1)
+HARVESTER_HOST = args.harvester_host
+HARVESTER_PORT = args.harvester_port
+HARVESTER_HOSTPORT = HARVESTER_HOST + ':' + str(HARVESTER_PORT)
 
-    # If the fetch fails (for whatever reason) the script will continue to fire requests at the server
+def main():
+    # This script attempts to get the current data from the API endpoint ... if it gets something and the data is
+    # different from "what it was before", the data will get overwritten.
+    #
+    # Current "raw" JSON response is stored in "current.json", the current track in "current.txt" and previously
+    # played tracks (minus the current one) in "history.log"
+
+    while True:
+        response = urlopen("http://%s/api/00000000-0000-0000-0000-000000000000/current" % HARVESTER_HOSTPORT)
+        if (response.getcode() == 200):
+            data = json.loads(response.read())
+            with open('current.json', 'w+') as file:
+                old = file.read()
+                if (old != str(data)):
+                    file.write(str(data))
+                    if ('track' in data):
+                        track = data.get('track')
+                        text = open('current.txt', 'w+')
+                        if (('artist' in track) and ('title' in track)):
+                            info = str(str(track.get('artist')) + ' - ' + str(track.get('title')))
+                            text.write(info)
+        sleep(1)
+
+        # If the fetch fails (for whatever reason) the script will continue to fire requests at the server
+
+if __name__ == "__main__":
+    main()
