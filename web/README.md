@@ -54,7 +54,7 @@ At the moment, there are a few distinct samples:
 
 This is a standalone version of the default browser visualization from Harvester v0.5 Beta ... If you've used Harvester in the past, this is the visualization UI your browser opens when the server is started.
 
-![Screenshot of "The original spinning platter"](./original-spinning-disk/screenshot.png)
+![Screenshot of "The original spinning platter"](./original-spinning-disk_screenshot.png)
 
 Originally, when the latest version of Harvester server was released, I believed that the built-in implementation of a client would be more than enough for developers to reverse engineer the moving parts and come up with their own visualizations using the API. However, since the code was not readily available online (instead, you had to grap the code from the server and see what it held inside) many developers thought this was all that Harvester was meant to be and dismissed the whole idea.
 
@@ -64,7 +64,7 @@ I did eventually put the original code for the visualization available for downl
 
 The next sample was possibly the simplest form of visualization. On-screen readout of tracks in (almost) log format - every time a new track is seen, a new line listing the timestamp, event-type, artist and title gets added to the page.
 
-![Screenshot of "The simple artist / song -list"](./simple-artist-and-song/screenshot.png)
+![Screenshot of "The simple artist / song -list"](./simple-artist-and-song_screenshot.png)
 
 While definitely not visually entertaining, the code was meant to be brief and comprehensive; this is how you receive data and this is a sample of how you can peruse it.
 
@@ -72,7 +72,7 @@ While definitely not visually entertaining, the code was meant to be brief and c
 
 Overlay visualizer for OBS (green background for chroma key) ... artist/track title scroll in/out when track changes.
 
-![Screenshot of "The OBS artist / song -overlay"](./sample-artist-and-song/screenshot.png)
+![Screenshot of "The OBS artist / song -overlay"](./sample-artist-and-song_screenshot.png)
 
 A minor modification of the simple artist/song -list visualizer. Main takeaway in the code is that it is rather easy to fade in/out the next/previous track. Also meant to demonstrate that the visualization can be created in such a fashion that it can be chroma-keyed (greenscreened) for use in streaming video production.
 
@@ -80,6 +80,6 @@ A minor modification of the simple artist/song -list visualizer. Main takeaway i
 
 Initial attempt to get something kinda "fancy" out of the visualization. This could be used as a video background or something like that. Initial visualization proof of concept provided by Yusuke Nakaya.
 
-![Screenshot of "The waving flag artist / song background-visualizer"](./waving-flag/screenshot.png)
+![Screenshot of "The waving flag artist / song background-visualizer"](./waving-flag_screenshot.png)
 
 There are still a few issues with the visualization code; mainly the fact that scaling the text based on the actual length of the artist- / title-texts hasn't been implemented as of yet (though, it shouldn't be too difficult to achieve). Also ... the visualization is currently rather "heavy" for the browser to render (but still definitely within the browser's capabilities even without any optimizations) at the moment.
