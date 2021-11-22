@@ -27,7 +27,7 @@ So... in case You're are still here, You're **exactly** the kind of tinkerer who
 # Samples
 
 * [Shell scripting](shell-script/) on *nix family (Linux, Mac OSX, etc.)
-* [Python](python/) ... there's also another version of the Python-client on branch ```python-with-json-to-txt```, however, the reason that hasn't been merged to the ```master``` branch is that the code doesn't seem to handle non-ASCII characters in track-/artist-names properly at this time. I'm fairly certain this is simply because I'm not casting the data properly, but since my experience with Python is limited, I haven't spent too much time looking into that. PRs are welcome.
+* [Python](python/) ... on *nix family (Linux, Mac OSX, etc.) ... and Windows (assuming You've got functional WSL, "Windows Subsystem for Linux") with Python3.
 
 # Common gotchas
 
