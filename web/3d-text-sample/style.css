@@ -8,6 +8,10 @@ body.greenscreen {
     background: rgb(0, 255, 0);
 }
 
+body {
+    transform-style: preserve-3d;
+}
+
 #current-track {
     opacity: 1;
     transition: opacity linear 2500ms;
@@ -16,7 +20,10 @@ body.greenscreen {
     top: 50%;
     left: 50%;
     width: 90%;
+    perspective: 250px;
     transform: translate(-50%, -50%);
+
+    will-change: opacity, transform;
 }
 
 #current-track > div {

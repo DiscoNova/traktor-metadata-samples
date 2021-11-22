@@ -4,13 +4,16 @@ if (!harvesterAPI) { throw new Error('The API has not been loaded? Unable to con
     // Closure used to avoid unnecessarily injecting functions to global scope...
     const body = doc.getElementsByTagName('body')[0];
     body.className = 'greenscreen'; // This visualization is meant for OBS
-    let nextReveal = null;
 
     const state = {
+        artist: '',
+        title: '',
         rotate3d: {
             p: 500
-        }
+        },
+        nextReveal: null
     };
+
     let deltaX = 3;
     let deltaY = 5;
     let deltaZ = 7;
@@ -19,23 +22,21 @@ if (!harvesterAPI) { throw new Error('The API has not been loaded? Unable to con
 
     function animate3d () {
         const currentTrackContainer = doc.getElementById('current-track');
-        if (!currentTrackContainer) {
-            win.requestAnimationFrame(animate3d);
-            return;
+        if (currentTrackContainer) {
+            state.rotate3d = {
+                ...state.rotate3d,
+                x: (((((state.rotate3d || {}).x) >> 0))) + deltaX,
+                y: (((((state.rotate3d || {}).y) >> 0))) + deltaY,
+                z: (((((state.rotate3d || {}).z) >> 0))) + deltaZ,
+                p: ((((state.rotate3d || {}).p) >> 0)) + deltaP,
+                r: ((((state.rotate3d || {}).r) >> 0)) + deltaR,
+            };
+            const x3d = Math.sin((state.rotate3d.x / 10) / 180 / Math.PI);
+            const y3d = Math.sin((state.rotate3d.y / 10) / 180 / Math.PI);
+            const z3d = Math.sin((state.rotate3d.z / 10) / 180 / Math.PI);
+            const r = Math.round(state.rotate3d.r / 30) % 360;
+            currentTrackContainer.style.transform = `translate(-50%, -50%) rotate3d(${x3d}, ${y3d}, ${z3d}, ${r}deg)`;
         }
-        state.rotate3d = {
-            ...state.rotate3d,
-            x: (((((state.rotate3d || {}).x) >> 0))) + deltaX,
-            y: (((((state.rotate3d || {}).y) >> 0))) + deltaY,
-            z: (((((state.rotate3d || {}).z) >> 0))) + deltaZ,
-            p: ((((state.rotate3d || {}).p) >> 0)) + deltaP,
-            r: ((((state.rotate3d || {}).r) >> 0)) + deltaR,
-        };
-        const x3d = Math.round(state.rotate3d.x);
-        const y3d = Math.round(state.rotate3d.y);
-        const z3d = Math.round(state.rotate3d.z);
-        const r = Math.round(state.rotate3d.r / 30);
-        currentTrackContainer.style.transform = `translate(-50%, -50%) rotate3d(${x3d}, ${y3d}, ${z3d}, ${r}deg)`;
         win.requestAnimationFrame(animate3d);
     }
 
@@ -44,19 +45,22 @@ if (!harvesterAPI) { throw new Error('The API has not been loaded? Unable to con
     function advertiseTrackInfo(artist, title) {
         if (state.artist === artist && state.title === title) { return; } // Nothing has changed; do nothing
 
+        state.artist = artist;
+        state.title = title;
+
         let delay = 0;
 
         const currentTrack = doc.getElementById('current-track');
         if (currentTrack) {
-            console.debug('First we need to fade out the current track ... ', currentTrack.innerHTML);
             delay += 2500;
             currentTrack.classList.add('fadeOut');
         }
 
-        if (nextReveal) {
-            win.clearTimeout(nextReveal);
+        if (state.nextReveal) {
+            win.clearTimeout(state.nextReveal);
         }
-        nextReveal = win.setTimeout(function() {
+
+        state.nextReveal = win.setTimeout(function() {
             if (currentTrack) {
                 currentTrack.parentNode.removeChild(currentTrack);
             }
@@ -66,10 +70,9 @@ if (!harvesterAPI) { throw new Error('The API has not been loaded? Unable to con
             div.className = 'text3d';
             const divArtist = doc.createElement('div');
             divArtist.appendChild(doc.createTextNode(artist));
+            div.appendChild(divArtist);
             const divTitle = doc.createElement('div');
             divTitle.appendChild(doc.createTextNode(title));
-
-            div.appendChild(divArtist);
             div.appendChild(divTitle);
             body.appendChild(div);
         }, delay);
