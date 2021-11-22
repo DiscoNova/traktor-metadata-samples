@@ -76,6 +76,14 @@ Overlay visualizer for OBS (green background for chroma key) ... artist/track ti
 
 A minor modification of the simple artist/song -list visualizer. Main takeaway in the code is that it is rather easy to fade in/out the next/previous track. Also meant to demonstrate that the visualization can be created in such a fashion that it can be chroma-keyed (greenscreened) for use in streaming video production.
 
+### [The OBS pseudo-3D-look -overlay](./sample-artist-and-song/)
+
+Overlay visualizer for OBS (green background for chroma key) ... artist/track title shown with pseudo-3D look.
+
+![Screenshot of "The OBS pseudo-3d-look -overlay"](./pseudo-3d-look_screenshot.png)
+
+Again, an overlay option for chroma-keying. Minimal animation (previous track fades out before next track is shown). Earlier version of this visualizer had a bit of 3D animation, but... frankly, it looked *so* bad that it's better without any of that :)
+
 ### [The waving flag "artist / song" background-visualizer](./waving-flag/)
 
 Initial attempt to get something kinda "fancy" out of the visualization. This could be used as a video background or something like that. Initial visualization proof of concept provided by Yusuke Nakaya.
