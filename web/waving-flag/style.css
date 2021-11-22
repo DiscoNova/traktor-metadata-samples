@@ -1,8 +1,5 @@
 html, body {
     background: #000;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +15,8 @@ html, body {
     transition: filter 750ms linear, opacity 1000ms linear;
     filter: blur(0);
     opacity: 1.0;
+    font-size: 6.75px;
+    transform-style: preserve-3d;
 }
 
 .current-track.fadeIn {
@@ -33,28 +32,27 @@ html, body {
 div.upper-line,
 div.lower-line {
     will-change: transform, opacity;
+    width: 100%;
 }
 
 .text-layer {
     filter: blur(0);
-    width: 75%;
+    width: 100% ;
     position: absolute;
-    top: calc(50% - 8rem / 2);
+    top: 50%;
     left: 50%;
-    transform-style: preserve-3d;
 }
 
 .text-layer .upper-line,
 .text-layer .lower-line {
-    margin-top: calc(0 - 8rem / 2);
+    margin-top: calc(0 - 1em);
     position: absolute;
-    font-size: 8rem;
+    font-size: 8em;
     color: #e6e6ff;
-    line-height: 8rem;
+    line-height: 1em;
     font-family: "Impact", sans-serif;
     padding: 20px 0;
     mix-blend-mode: screen;
-    transform-style: preserve-3d;
 }
 
 .text-layer .upper-line:nth-child(1),
@@ -328,7 +326,7 @@ div.lower-line {
         opacity: 0.5;
     }
     100% {
-        transform: translate(-50%, -50%) scale(1.05) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        transform: translate(-50%, -50%) scale(1.05) rotateX(0) rotateY(0) rotateZ(0);
         color: #e6e6ff;
         opacity: 1.0;
     }
